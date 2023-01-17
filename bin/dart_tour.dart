@@ -1,7 +1,15 @@
-class Player {
+abstract class Human {
+  void walk();
+}
+
+enum Team { red, blue }
+
+enum XPLevel { beginner, medium, pro }
+
+class Player extends Human{
   String name;
-  int xp;
-  String team;
+  XPLevel xp;
+  Team team;
 
   Player({
     required this.name,
@@ -10,16 +18,32 @@ class Player {
   });
 
   void sayHello() {
-    print("Hi my name is $name");
+    print("Hi my name is $name , $xp , $team");
+  }
+  
+  @override
+  void walk() {
+    print('im walking');
+  }
+}
+
+class Coach extends Human {
+  void walk() {
+    print('the coach is walking');
   }
 }
 
 void main() {
-  var nico = Player(name: 'nico', xp: 1200, team: 'red');
+  var nico = Player(
+    name: 'nico',
+    xp: XPLevel.medium,
+    team: Team.red,
+  );
   var potato = nico
-  ..name = 'las'
-  ..xp = 1200000
-  ..team = 'blue'
-  ..sayHello();
+    ..name = 'las'
+    ..xp = XPLevel.pro
+    ..team = Team.blue
+    ..sayHello()
+    ..walk();
   potato;
 }
